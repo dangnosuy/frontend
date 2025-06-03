@@ -12,7 +12,7 @@ function TextToImage() {
     }
     
     console.log(data)
-    fetch('http://127.0.0.1:5551/api/texttoimage', {
+    fetch('https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/texttoimage', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json' 
@@ -96,7 +96,7 @@ function getUserImages() {
     // Giả sử type của bạn là "text_to_image"
     var type = "text_to_image";
 
-    fetch(`http://127.0.0.1:5551/api/get_data_user?username=${encodeURIComponent(username)}&type=${encodeURIComponent(type)}`, {
+    fetch(`https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/get_data_user?username=${encodeURIComponent(username)}&type=${encodeURIComponent(type)}`, {
         method: 'GET'
     })
     .then(response => response.json())
@@ -126,7 +126,7 @@ function deleteImage(filePath, imageItem) {
         file_path: filePath,
         type: "text_to_image"
     }
-    fetch('http://127.0.0.1:5551/api/delete_data', {
+    fetch('https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/delete_data', {
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
@@ -149,7 +149,7 @@ function deleteImage(filePath, imageItem) {
 function getAllImages() {
     const username = localStorage.getItem('username') || sessionStorage.getItem('username');
     const type = 'text_to_image';
-    fetch(`http://127.0.0.1:5551/api/get_data_all?type=${encodeURIComponent(type)}&username=${encodeURIComponent(username)}`, {
+    fetch(`https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/get_data_all?type=${encodeURIComponent(type)}&username=${encodeURIComponent(username)}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -269,7 +269,7 @@ function getAllImages() {
                     let likes = parseInt(this.getAttribute('data-likes'));
 
                     // Gửi yêu cầu đến endpoint /api/tym
-                    fetch('http://127.0.0.1:5551/api/tym', {
+                    fetch('https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/tym', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -481,7 +481,7 @@ function getAllImages() {
                     commentsList.className = 'comments-list';
                     commentsList.style.cssText = `max-height: 200px; overflow-y: auto;`;
 
-                    fetch(`http://127.0.0.1:5551/api/get_comments?id=${imageData.id}`)
+                    fetch(`https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/get_comments?id=${imageData.id}`)
                         .then(response => response.json())
                         .then(data => {
                             if (data.success && data.comments.length > 0) {
@@ -568,7 +568,7 @@ function getAllImages() {
                         const id = this.dataset.id;
                         let likes = parseInt(this.dataset.likes);
 
-                        fetch('http://127.0.0.1:5551/api/tym', {
+                        fetch('https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/tym', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ username, id, product: type })
@@ -630,7 +630,7 @@ function getAllImages() {
                     commentButton.addEventListener('click', () => {
                         const comment = commentInput.value.trim();
                         if (comment) {
-                            fetch('http://127.0.0.1:5551/api/add_comment', {
+                            fetch('https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/add_comment', {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ imageId: imageData.id, username, comment })
