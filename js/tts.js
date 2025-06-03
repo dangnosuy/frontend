@@ -1,6 +1,6 @@
 function SendPrompt() {
   
-    var username = localStorage.getItem('username')
+    var username = localStorage.getItem('username') || sessionStorage.getItem('username');
 
     var text = document.getElementById('textInput').value;
     var national = document.getElementById('language').value;
