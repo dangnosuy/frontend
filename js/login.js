@@ -378,6 +378,5 @@ window.addEventListener('DOMContentLoaded', () => {
   if (msg) {
     showToast(msg); 
     alert(msg);
-    sessionStorage.removeItem('message');
   }
 });
