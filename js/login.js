@@ -361,14 +361,6 @@ function sendGoogleTokenToBackend(idToken) {
     );
     }
 
-
-window.addEventListener('DOMContentLoaded', () => {
-  const isRemembered = localStorage.getItem("loggedIn") === "true";
-  if (isRemembered) {
-    document.getElementById("rememberMe").checked = true;
-  }
-});
-
 window.addEventListener('DOMContentLoaded', () => {
   const isRemembered = localStorage.getItem("loggedIn") === "true";
   if (isRemembered) {
