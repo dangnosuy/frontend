@@ -287,7 +287,7 @@
     async function sendText() {
       // test username
 
-      const username = localStorage.getItem('username');
+      const username = localStorage.getItem('username') || sessionStorage.getItem('username');
       // lấy dữ liệu từ form
       const text = document.getElementById("textInput").value;
       document.getElementById("textInput").value = "";
@@ -340,11 +340,11 @@
       }
     };
     async function sendFile() {
-      const username = localStorage.getItem('username');
+      const username = localStorage.getItem('username') || sessionStorage.getItem('username');
       const fileInput = document.getElementById('file-upload');
       const promptInput = document.getElementById('file-prompt');
 
-      if (!fileInput.files.length) {
+      if (!fileInput.files.length) {a
         alert('Vui lòng chọn file để upload');
         return;
       }
@@ -455,7 +455,7 @@
 
     // Gọi khi load trang (hoặc khi đăng nhập xong)
     window.addEventListener("DOMContentLoaded", () => {
-      const username = localStorage.getItem('username'); // Thay bằng username thật sau khi login
+      const username = localStorage.getItem('username') || sessionStorage.getItem('username');
       loadHistory(username);
     });
 
