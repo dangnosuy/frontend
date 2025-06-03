@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector(".avatar-container")?.classList.remove("hidden");
     document.querySelector(".login-container")?.classList.add("hidden");
 
-    fetch(`http://127.0.0.1:5550/api/get_avatar?username=${encodeURIComponent(username)}`)
+    fetch(`https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/get_avatar?username=${encodeURIComponent(username)}`)
       .then(response => response.json())
       .then(data => {
         if (data.success) {
