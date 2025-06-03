@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const type = 'text_to_music';
 
   // Gửi request GET đến API lấy lịch sử
-  fetch(`https://0667af30-f437-4343-bd10-6c6e8c341ce8-00-2fe3pat0r6lg3.pike.replit.dev/api/get_data_user?username=${encodeURIComponent(username)}&type=${encodeURIComponent(type)}`)
+  fetch(`https://0667af30-f437-4343-bd10-6c6e8c341ce8-00-2fe3pat0r6lg3.pike.replit.dev/api/get_data_ttm_user?username=${encodeURIComponent(username)}&type=${encodeURIComponent(type)}`)
     .then(response => response.json())
     .then(data => {
       if (data.success) {
@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("Dữ liệu từ API (all):", data);
 
         // Chuyển đổi dữ liệu từ API thành định dạng audioTracks
-        audioTracks = data.ttm_data.map(item => {
+        audioTracks = data.ttall.map(item => {
           const shortPrompt = formatShortPrompt(item.input_text);
           return {
             id: item.id,
