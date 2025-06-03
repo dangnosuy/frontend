@@ -377,6 +377,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const msg = sessionStorage.getItem('message');
   if (msg) {
     showToast(msg); 
+    alert("msg");
     sessionStorage.removeItem('message');
   }
 });
