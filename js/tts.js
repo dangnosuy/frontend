@@ -17,7 +17,7 @@ function SendPrompt() {
         gender : gender
     }
 
-    fetch('http://127.0.0.1:5550/api/texttospeech', {
+    fetch('https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/texttospeech', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json' 
