@@ -241,8 +241,6 @@ body
 
 .toast {
   min-width: 300px;
-  max-with: 300px;
-  float: right;  
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.13);
