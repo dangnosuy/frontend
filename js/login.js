@@ -15,6 +15,20 @@ $(document).ready(function()
     });
 });
 
+function showToast(message, duration = 5000) {
+    const toast = document.getElementById('customToast');
+    const toastBody = document.getElementById('toastBody');
+    toastBody.textContent = message;
+    toast.classList.add('show');
+    if (toast.hideTimeout) clearTimeout(toast.hideTimeout);
+    toast.hideTimeout = setTimeout(hideToast, duration);
+}
+
+function hideToast() {
+    const toast = document.getElementById('customToast');
+    toast.classList.remove('show');
+}
+
 const username_form = document.getElementById("username")
 if(username_form){
     username_form.addEventListener("click", function() {
@@ -105,13 +119,14 @@ async function Send_SignUp() {
         }
 
         const data = { username, email, password};
+        showToast("Đang xử lý....", 60 * 1000); 
     try {
         const response = await fetch("https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/sign_up", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data),
         });
-         
+        hideToast();
         const result = await response.json();
         if (result.check_username || result.check_email) {
             error_message = "";
@@ -239,6 +254,7 @@ async function Send_VerifyEmail() {
         }
 
         if (result.success) {
+            sessionStorage.setItem('message', 'Đăng ký thành công! Vui lòng đăng nhập.');
             window.location.href = 'sign_in.html'
         } else {
             alert("Email Confirmation Failed: " + result.message);
@@ -291,6 +307,7 @@ async function Send_SubmitResetPassword() {
             return
         }
         if (result.success) {
+            sessionStorage.setItem('message', 'Liên kết đặt lại mật khẩu đã được gửi đến email của bạn', 10 * 1000);
             window.location.href = "sign_in.html";
         } else {
             alert("Reset password Failed: " + result.message);
@@ -320,7 +337,7 @@ function sendGoogleTokenToBackend(idToken) {
     .then(data => {
         if (data.success) {
             sessionStorage.setItem("loggedIn", "true");
-            localStorage.setItem('username', data.username);
+            sessionStorage.setItem('username', data.username);
             window.location.href = "./index.html";
         } else {
         alert("Đăng nhập bằng Google thất bại: " + data.message);
@@ -348,5 +365,17 @@ window.addEventListener('DOMContentLoaded', () => {
   const isRemembered = localStorage.getItem("loggedIn") === "true";
   if (isRemembered) {
     document.getElementById("rememberMe").checked = true;
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  const isRemembered = localStorage.getItem("loggedIn") === "true";
+  if (isRemembered) {
+    document.getElementById("rememberMe").checked = true;
+  }
+  const msg = sessionStorage.getItem('message');
+  if (msg) {
+    showToast(msg); 
+    sessionStorage.removeItem('message');
   }
 });
