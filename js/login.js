@@ -292,13 +292,14 @@ async function Send_SubmitResetPassword() {
     }
 
     const data = {username, email};
+    showToast("Đang xử lý....", 60 * 1000); 
     try {
         const response = await fetch("https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/reset_password", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data),
         });
-         
+    hideToast();
         const result = await response.json();
         if (!response.ok){
             document.getElementById("username_form").className = "form_error";
@@ -307,7 +308,7 @@ async function Send_SubmitResetPassword() {
             return
         }
         if (result.success) {
-            sessionStorage.setItem('message', 'Liên kết đặt lại mật khẩu đã được gửi đến email của bạn', 10 * 1000);
+            sessionStorage.setItem('message', 'Liên kết đặt lại mật khẩu đã được gửi đến email của bạn');
             window.location.href = "sign_in.html";
         } else {
             alert("Reset password Failed: " + result.message);
