@@ -261,7 +261,7 @@
 
       try {
         const response = await fetch(
-          "https://ba099f05-8ead-421a-b029-5287401eb07a-00-10jkvmlab05re.pike.replit.dev/api/texttovideo",
+          "https://0667af30-f437-4343-bd10-6c6e8c341ce8-00-2fe3pat0r6lg3.pike.replit.dev/api/texttovideo",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -306,7 +306,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
     const username = localStorage.getItem('username') || sessionStorage.getItem('username');
-      fetch(`https://ba099f05-8ead-421a-b029-5287401eb07a-00-10jkvmlab05re.pike.replit.dev/api/get_ttv_data?username=${username}`)
+      fetch(`https://0667af30-f437-4343-bd10-6c6e8c341ce8-00-2fe3pat0r6lg3.pike.replit.dev/api/get_ttv_data?username=${username}`)
         .then((res) => res.json())
         .then((data) => {
           const videoList = document.getElementById("video-list");
