@@ -23,11 +23,11 @@ body
 #login_register
 {
     max-width:  400px;
-    background: rgba(53, 25, 117, 0.9);
+    background: rgba(49, 18, 121, 0.9);
     flex-grow: 1;
     display: grid;
     padding: 30px 30px 40px;
-    box-shadow: 0px 0px 20px 3px rgba(160, 129, 231, 0.8);
+    box-shadow: 0px 0px 20px 1px rgba(160, 129, 231, 0.5);
 }
 
 .control
