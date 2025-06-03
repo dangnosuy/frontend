@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
     const balance = document.getElementById('user-balance');
 
-    const username = localStorage.getItem('username')
     console.log(username)
 
     fetch(`https://68cfba9e-fe18-4301-8a54-7a4bfc790350-00-26ktjx6yhw4zw.pike.replit.dev/api/get_balance?username=${username}`, {
