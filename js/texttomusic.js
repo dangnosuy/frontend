@@ -10,7 +10,7 @@ function SendPrompt() {
   document.getElementById('loading').style.display = 'flex'
   let prompt = document.getElementById('textInput').value
   prompt = prompt.replace(/[,!@#$%^&*()+=[\]{}|;:'"<>?]/g, '').trim(); // Loại bỏ khoảng trắng thừa ở đầu và cuối
-  const username = localStorage.getItem('username')
+  const username = localStorage.getItem('username') || sessionStorage.getItem('username');
 
   var data = {
     username: username,
@@ -124,7 +124,7 @@ function addSongCard(songTitle, genre, duration, audioPath, createdBy) {
 }
 document.addEventListener('DOMContentLoaded', function () {
   // Thay đổi giá trị username và type theo yêu cầu của bạn
-  const username = localStorage.getItem('username');
+  const username = localStorage.getItem('username') || sessionStorage.getItem('username');
   const type = 'text_to_music';
 
   // Gửi request GET đến API lấy lịch sử
@@ -229,7 +229,7 @@ function renderAudioSlider() {
 }
 
 function toggleLike(trackId, button, currentLikes) {
-  const username = localStorage.getItem('username') || "current_user"; // Lấy username từ localStorage
+  const username = localStorage.getItem('username') || sessionStorage.getItem('username') || "current_user"; // Lấy username từ localStorage
   const product = "text_to_music";
 
   // Gửi yêu cầu đến /api/tym
@@ -285,7 +285,7 @@ function toggleLike(trackId, button, currentLikes) {
 // Load dữ liệu khi khởi động
 document.addEventListener('DOMContentLoaded', function () {
   const type = 'text_to_music';
-  const username = localStorage.getItem('username') || 'current_user';
+  const username = localStorage.getItem('username') || sessionStorage.getItem('username') || 'current_user';
 
   // Gửi request GET đến API lấy tất cả dữ liệu
   fetch(`http://127.0.0.1:5554/api/get_data_all?type=${encodeURIComponent(type)}&username=${encodeURIComponent(username)}`, {
