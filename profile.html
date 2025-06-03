@@ -116,7 +116,7 @@
     // Lấy user info khi vào trang
     window.onload = function () {
       showTab("Detail", new Event("load"));
-      const currentUsername = localStorage.getItem("username");
+      const currentUsername = localStorage.getItem('username') || sessionStorage.getItem('username');
       if (currentUsername) {
         fetch(
           `http://127.0.0.1:5555/api/get_user_info?username=${encodeURIComponent(
@@ -144,7 +144,7 @@
 
     // Load 5 sản phẩm gần nhất
     function loadRecentProducts() {
-      const username = localStorage.getItem("username");
+      const username = localStorage.getItem('username') || sessionStorage.getItem('username');
       const productDiv = document.getElementById("recentProductList");
       productDiv.innerHTML = "Đang tải...";
 
@@ -205,7 +205,7 @@
   </script>
   <script>
     function loadDepositHistory() {
-      const username = localStorage.getItem("username");
+      const username = localStorage.getItem('username') || sessionStorage.getItem('username');
       const depositDiv = document.getElementById("depositHistoryList");
       depositDiv.innerHTML = "Đang tải...";
 
