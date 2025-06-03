@@ -248,7 +248,7 @@
       const prompt = document.getElementById("prompt").value.trim();
       const videoList = document.getElementById("video-list");
       const style = document.querySelector("select").value;
-      const username = localStorage.getItem("username");
+      const username = localStorage.getItem('username') || sessionStorage.getItem('username');
 
       if (!prompt) {
         alert("Vui lòng nhập nội dung trước khi tạo video.");
@@ -306,13 +306,7 @@
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const username = localStorage.getItem("username");
-      if (!username) {
-        alert("Chưa đăng nhập! Vui lòng đăng nhập lại.");
-        window.location.href = "/frontend/Sign_in.html";
-        return;
-      }
-
+    const username = localStorage.getItem('username') || sessionStorage.getItem('username');
       fetch(`http://localhost:5555/api/get_ttv_data?username=${username}`)
         .then((res) => res.json())
         .then((data) => {
