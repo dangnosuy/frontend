@@ -239,7 +239,7 @@ async function Send_VerifyEmail() {
         }
 
         if (result.success) {
-            window.location.href = 'Sign_in.html'
+            window.location.href = 'sign_in.html'
         } else {
             alert("Email Confirmation Failed: " + result.message);
         }
@@ -291,7 +291,7 @@ async function Send_SubmitResetPassword() {
             return
         }
         if (result.success) {
-            window.location.href = "Sign_in.html";
+            window.location.href = "sign_in.html";
         } else {
             alert("Reset password Failed: " + result.message);
         }
