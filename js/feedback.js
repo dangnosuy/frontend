@@ -68,7 +68,7 @@ function SendFeedback(event) {
         feedback: feedback.value
     }
     username.value = email.value = feedback.value = ""
-    fetch('http://127.0.0.1:5553/api/feedback', {
+    fetch('https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev:5553/api/feedback', {
         method: "POST",
         headers: {
             'Content-Type': "application/json"
