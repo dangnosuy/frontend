@@ -6,7 +6,7 @@ function set_avatar() {
         username: username,
         prompt : prompt
     }
-    fetch('http://127.0.0.1:5550/api/generate_avatar', {
+    fetch('https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/generate_avatar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
