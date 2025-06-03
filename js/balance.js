@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const username = localStorage.getItem('username') || sessionStorage.getItem('username');
     console.log(username)
 
-    fetch(`http://127.0.0.1:5555/api/get_balance?username=${username}`, {
+    fetch(`https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/get_balance?username=${username}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
