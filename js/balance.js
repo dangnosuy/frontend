@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const balance = document.getElementById('user-balance');
-
-    const username = localStorage.getItem('username')
+    const username = localStorage.getItem('username') || sessionStorage.getItem('username');
     console.log(username)
 
     fetch(`http://127.0.0.1:5555/api/get_balance?username=${username}`, {
