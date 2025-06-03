@@ -126,7 +126,7 @@ function deleteImage(filePath, imageItem) {
         file_path: filePath,
         type: "text_to_image"
     }
-    fetch('https://0667af30-f437-4343-bd10-6c6e8c341ce8-00-2fe3pat0r6lg3.pike.replit.dev//api/delete_data', {
+    fetch('https://0667af30-f437-4343-bd10-6c6e8c341ce8-00-2fe3pat0r6lg3.pike.replit.dev/api/delete_data', {
         method: 'POST',
         headers: {
             'Content-Type' : 'application/json'
@@ -269,7 +269,7 @@ function getAllImages() {
                     let likes = parseInt(this.getAttribute('data-likes'));
 
                     // Gửi yêu cầu đến endpoint /api/tym
-                    fetch('https://0667af30-f437-4343-bd10-6c6e8c341ce8-00-2fe3pat0r6lg3.pike.replit.dev//api/tym', {
+                    fetch('https://0667af30-f437-4343-bd10-6c6e8c341ce8-00-2fe3pat0r6lg3.pike.replit.dev/api/tym', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
