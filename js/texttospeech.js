@@ -30,7 +30,7 @@ async function sendText() {
   audioElement.src = "";
 
   try {
-    const response = await fetch("http://127.0.0.1:5552/api/tts_choice", {
+    const response = await fetch("https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/tts_choice", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
