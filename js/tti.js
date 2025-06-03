@@ -1,6 +1,6 @@
 function TextToImage() {
     event.preventDefault();
-    var username = localStorage.getItem('username')
+    var username = localStorage.getItem('username') || sessionStorage.getItem('username');
     var prompt = document.getElementById('textInput').value
     const spinner = document.getElementById('spinner');
     var style = document.getElementById('style').value
@@ -92,7 +92,7 @@ function addImageToGallery(filePath) {
     gallery.appendChild(imageItem);
 }
 function getUserImages() {
-    var username = localStorage.getItem('username');
+    var username = localStorage.getItem('username') || sessionStorage.getItem('username');
     // Giả sử type của bạn là "text_to_image"
     var type = "text_to_image";
 
@@ -119,7 +119,7 @@ function getUserImages() {
     });
 }
 function deleteImage(filePath, imageItem) {
-    const username = localStorage.getItem('username')
+    const username = localStorage.getItem('username') || sessionStorage.getItem('username');
  //token theo để xác minh nó đúng
     const data = {
         username: username,
@@ -147,7 +147,7 @@ function deleteImage(filePath, imageItem) {
     })
 }
 function getAllImages() {
-    const username = localStorage.getItem('username')
+    const username = localStorage.getItem('username') || sessionStorage.getItem('username');
     const type = 'text_to_image';
     fetch(`http://127.0.0.1:5551/api/get_data_all?type=${encodeURIComponent(type)}&username=${encodeURIComponent(username)}`, {
         method: 'GET',
