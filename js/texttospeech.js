@@ -9,7 +9,7 @@ document
 async function sendText() {
   // test username
 
-  const username = localStorage.getItem('username');
+  const username = localStorage.getItem('username') || sessionStorage.getItem('username');
   // lấy dữ liệu từ form
   const text = document.getElementById("textInput").value;
   document.getElementById("textInput").value = "";
@@ -126,7 +126,7 @@ async function loadHistory(username) {
 
 // Gọi khi load trang (hoặc khi đăng nhập xong)
 window.addEventListener("DOMContentLoaded", () => {
-  const username = localStorage.getItem('username'); // Thay bằng username thật sau khi login
+  const username = localStorage.getItem('username') || sessionStorage.getItem('username');
   loadHistory(username);
 });
 
