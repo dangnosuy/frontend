@@ -16,10 +16,12 @@ $(document).ready(function()
 });
 
 function showToast(message, duration = 5000) {
+    alert("1");
     const toast = document.getElementById('customToast');
     const toastBody = document.getElementById('toastBody');
     toastBody.textContent = message;
     toast.classList.add('show');
+    alert("2");
     if (toast.hideTimeout) clearTimeout(toast.hideTimeout);
     toast.hideTimeout = setTimeout(hideToast, duration);
 }
@@ -27,6 +29,7 @@ function showToast(message, duration = 5000) {
 function hideToast() {
     const toast = document.getElementById('customToast');
     toast.classList.remove('show');
+    alert("3");
 }
 
 const username_form = document.getElementById("username")
@@ -378,5 +381,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (msg) {
     showToast(msg); 
     alert(msg);
+    sessionStorage.removeItem('message');
   }
 });
