@@ -19,7 +19,7 @@ function set_avatar() {
             if (jsonData.success === true) {
                 avatar.src = jsonData.avatar_url;
                 localStorage.setItem('avatar', jsonData.avatar_url)
-                window.location.href = 'Sign_in.html'
+                window.location.href = 'sign_in.html'
             }
             else {
                 console.log("Error: ", jsonData.error)
