@@ -106,7 +106,7 @@ async function Send_SignUp() {
 
         const data = { username, email, password};
     try {
-        const response = await fetch("http://127.0.0.1:5550/api/sign_up", {
+        const response = await fetch("https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/sign_up", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data),
@@ -170,7 +170,7 @@ async function Send_SignIn() {
 
     const data = {username, password};
     try {
-        const response = await fetch("http://127.0.0.1:5550/api/sign_in", {
+        const response = await fetch("https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/sign_in", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data),
@@ -225,7 +225,7 @@ async function Send_VerifyEmail() {
         return
     }
     try {
-        const response = await fetch("http://127.0.0.1:5550/api/verify_email", {
+        const response = await fetch("https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/verify_email", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, code }),
@@ -277,7 +277,7 @@ async function Send_SubmitResetPassword() {
 
     const data = {username, email};
     try {
-        const response = await fetch("http://127.0.0.1:5550/api/reset_password", {
+        const response = await fetch("https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/reset_password", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data),
@@ -309,7 +309,7 @@ function handleCredentialResponse(response) {
 }
 
 function sendGoogleTokenToBackend(idToken) {
-    fetch("http://127.0.0.1:5550/api/google_login", {
+    fetch("https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/google_login", {
         method: "POST",
         headers: {
         'Content-Type': 'application/json'
