@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Tạo container cho chatbot với position fixed và z-index cao
-    const chatbotContainer = document.createElement('div');
-    chatbotContainer.classList.add('chatbot-wrapper');
-    chatbotContainer.innerHTML = `
+document.addEventListener("DOMContentLoaded", () => {
+  // Tạo container cho chatbot với position fixed và z-index cao
+  const chatbotContainer = document.createElement("div");
+  chatbotContainer.classList.add("chatbot-wrapper");
+  chatbotContainer.innerHTML = `
         <div class="fixed bottom-6 right-6 z-[9999]">
             <button id="chatToggle" class="chat-button relative p-4 rounded-full shadow-lg">
                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
@@ -42,11 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
     `;
-    document.body.appendChild(chatbotContainer);
+  document.body.appendChild(chatbotContainer);
 
-    // CSS inline với !important để ngăn chặn các xung đột và các styles khác ghi đè
-    const style = document.createElement('style');
-    style.textContent = `
+  // CSS inline với !important để ngăn chặn các xung đột và các styles khác ghi đè
+  const style = document.createElement("style");
+  style.textContent = `
         .chatbot-wrapper {
             position: fixed;
             bottom: 0;
@@ -195,164 +195,193 @@ document.addEventListener('DOMContentLoaded', () => {
             0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }
         }`;
-    document.head.appendChild(style);
+  document.head.appendChild(style);
 
-    // Thêm marked.js từ CDN nếu chưa có
-    if (!window.marked) {
-        const markedScript = document.createElement('script');
-        markedScript.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
-        document.head.appendChild(markedScript);
+  // Thêm marked.js từ CDN nếu chưa có
+  if (!window.marked) {
+    const markedScript = document.createElement("script");
+    markedScript.src = "https://cdn.jsdelivr.net/npm/marked/marked.min.js";
+    document.head.appendChild(markedScript);
+  }
+
+  // Logic tương tác
+  const chatToggle = document.getElementById("chatToggle");
+  const chatWindow = document.getElementById("chatWindow");
+  const closeChat = document.getElementById("closeChat");
+  const toggleFullscreen = document.getElementById("toggleFullscreen");
+  const chatBox = document.getElementById("chatBox");
+  const chatInput = document.getElementById("chatInput");
+  const sendButton = document.getElementById("sendMessage");
+  let lastResponse = "";
+  let isFullscreen = false;
+
+  chatToggle.addEventListener("click", () => {
+    chatWindow.classList.toggle("hidden");
+    if (!chatWindow.classList.contains("hidden")) {
+      if (typeof AOS !== "undefined") {
+        AOS.refresh();
+      }
+      chatInput.focus();
     }
+  });
 
-    // Logic tương tác
-    const chatToggle = document.getElementById('chatToggle');
-    const chatWindow = document.getElementById('chatWindow');
-    const closeChat = document.getElementById('closeChat');
-    const toggleFullscreen = document.getElementById('toggleFullscreen');
-    const chatBox = document.getElementById('chatBox');
-    const chatInput = document.getElementById('chatInput');
-    const sendButton = document.getElementById('sendMessage');
-    let lastResponse = '';
-    let isFullscreen = false;
+  closeChat.addEventListener("click", () => {
+    chatWindow.classList.add("hidden");
+    if (isFullscreen) {
+      chatWindow.classList.remove("w-full", "h-full", "bottom-0", "right-0");
+      chatWindow.classList.add(
+        "w-80",
+        "md:w-96",
+        "h-[500px]",
+        "bottom-20",
+        "right-6"
+      );
+      isFullscreen = false;
+    }
+  });
 
-    chatToggle.addEventListener('click', () => {
-        chatWindow.classList.toggle('hidden');
-        if (!chatWindow.classList.contains('hidden')) {
-            if (typeof AOS !== 'undefined') {
-                AOS.refresh();
-            }
-            chatInput.focus();
-        }
-    });
+  // Revised click handler - only close if the click is outside of the chat elements
+  document.addEventListener("click", (e) => {
+    if (
+      !chatWindow.contains(e.target) &&
+      !chatToggle.contains(e.target) &&
+      !chatWindow.classList.contains("hidden")
+    ) {
+      chatWindow.classList.add("hidden");
+      if (isFullscreen) {
+        chatWindow.classList.remove("w-full", "h-full", "bottom-0", "right-0");
+        chatWindow.classList.add(
+          "w-80",
+          "md:w-96",
+          "h-[500px]",
+          "bottom-20",
+          "right-6"
+        );
+        isFullscreen = false;
+      }
+    }
+  });
 
-    closeChat.addEventListener('click', () => {
-        chatWindow.classList.add('hidden');
-        if (isFullscreen) {
-            chatWindow.classList.remove('w-full', 'h-full', 'bottom-0', 'right-0');
-            chatWindow.classList.add('w-80', 'md:w-96', 'h-[500px]', 'bottom-20', 'right-6');
-            isFullscreen = false;
-        }
-    });
+  toggleFullscreen.addEventListener("click", () => {
+    if (!isFullscreen) {
+      chatWindow.classList.add("w-full", "h-full", "bottom-0", "right-0");
+      chatWindow.classList.remove(
+        "w-80",
+        "md:w-96",
+        "h-[500px]",
+        "bottom-20",
+        "right-6"
+      );
+      isFullscreen = true;
+    } else {
+      chatWindow.classList.remove("w-full", "h-full", "bottom-0", "right-0");
+      chatWindow.classList.add(
+        "w-80",
+        "md:w-96",
+        "h-[500px]",
+        "bottom-20",
+        "right-6"
+      );
+      isFullscreen = false;
+    }
+  });
 
-    // Revised click handler - only close if the click is outside of the chat elements
-    document.addEventListener('click', (e) => {
-        if (!chatWindow.contains(e.target) && 
-            !chatToggle.contains(e.target) && 
-            !chatWindow.classList.contains('hidden')) {
-            chatWindow.classList.add('hidden');
-            if (isFullscreen) {
-                chatWindow.classList.remove('w-full', 'h-full', 'bottom-0', 'right-0');
-                chatWindow.classList.add('w-80', 'md:w-96', 'h-[500px]', 'bottom-20', 'right-6');
-                isFullscreen = false;
-            }
-        }
-    });
+  sendButton.addEventListener("click", async () => {
+    const message = chatInput.value.trim();
+    if (!message) return;
 
-    toggleFullscreen.addEventListener('click', () => {
-        if (!isFullscreen) {
-            chatWindow.classList.add('w-full', 'h-full', 'bottom-0', 'right-0');
-            chatWindow.classList.remove('w-80', 'md:w-96', 'h-[500px]', 'bottom-20', 'right-6');
-            isFullscreen = true;
-        } else {
-            chatWindow.classList.remove('w-full', 'h-full', 'bottom-0', 'right-0');
-            chatWindow.classList.add('w-80', 'md:w-96', 'h-[500px]', 'bottom-20', 'right-6');
-            isFullscreen = false;
-        }
-    });
-
-    sendButton.addEventListener('click', async () => {
-        const message = chatInput.value.trim();
-        if (!message) return;
-
-        // Using the message-wrapper for better alignment of short messages
-        chatBox.innerHTML += `
+    // Using the message-wrapper for better alignment of short messages
+    chatBox.innerHTML += `
             <div class="message-wrapper user">
                 <span class="user-message">${message}</span>
             </div>
         `;
-        chatBox.scrollTop = chatBox.scrollHeight;
-        chatInput.value = '';
+    chatBox.scrollTop = chatBox.scrollHeight;
+    chatInput.value = "";
 
-        chatInput.disabled = true;
-        sendButton.disabled = true;
-        sendButton.classList.add('opacity-50', 'cursor-not-allowed');
+    chatInput.disabled = true;
+    sendButton.disabled = true;
+    sendButton.classList.add("opacity-50", "cursor-not-allowed");
 
-        // Compact typing indicator
-        const typingEl = document.createElement('div');
-        typingEl.id = 'typingIndicator';
-        typingEl.className = 'message-wrapper';
-        typingEl.innerHTML = `
+    // Compact typing indicator
+    const typingEl = document.createElement("div");
+    typingEl.id = "typingIndicator";
+    typingEl.className = "message-wrapper";
+    typingEl.innerHTML = `
             <div class="bot-message typing-indicator">
                 <span class="typing-dot"></span>
                 <span class="typing-dot"></span>
                 <span class="typing-dot"></span>
             </div>
         `;
-        chatBox.appendChild(typingEl);
-        chatBox.scrollTop = chatBox.scrollHeight;
-        
-        try {
-            const response = await fetch('https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message })
-            });
-            const result = await response.json();
-            if (typingEl.parentNode) typingEl.remove();
-            
-            if (result.response) {
-                lastResponse = result.response;
-                // Wait for marked to be loaded
-                if (typeof marked !== 'undefined') {
-                    const htmlResponse = marked.parse(lastResponse);
-                    chatBox.innerHTML += `
+    chatBox.appendChild(typingEl);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    try {
+      const response = await fetch(
+        "https://32064896-bb46-45bb-849e-6f71eb6165c8-00-3ucmn61arfzqz.pike.replit.dev/api/chat",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        }
+      );
+      const result = await response.json();
+      if (typingEl.parentNode) typingEl.remove();
+
+      if (result.response) {
+        lastResponse = result.response;
+        // Wait for marked to be loaded
+        if (typeof marked !== "undefined") {
+          const htmlResponse = marked.parse(lastResponse);
+          chatBox.innerHTML += `
                         <div class="message-wrapper">
                             <div class="bot-message text-white">
                                 ${htmlResponse}
                             </div>
                         </div>
                     `;
-                } else {
-                    // Fallback if marked is not loaded
-                    chatBox.innerHTML += `
+        } else {
+          // Fallback if marked is not loaded
+          chatBox.innerHTML += `
                         <div class="message-wrapper">
                             <div class="bot-message text-white">
-                                ${lastResponse.replace(/\n/g, '<br>')}
+                                ${lastResponse.replace(/\n/g, "<br>")}
                             </div>
                         </div>
                     `;
-                }
-            } else {
-                chatBox.innerHTML += `
+        }
+      } else {
+        chatBox.innerHTML += `
                     <div class="message-wrapper">
                         <div class="bot-message text-red-400">
-                            ${result.error || 'An error occurred'}
+                            ${result.error || "An error occurred"}
                         </div>
                     </div>
                 `;
-            }
-        } catch (e) {
-            if (typingEl.parentNode) typingEl.remove();
-            chatBox.innerHTML += `
+      }
+    } catch (e) {
+      if (typingEl.parentNode) typingEl.remove();
+      chatBox.innerHTML += `
                 <div class="message-wrapper">
                     <div class="bot-message text-red-400">
                         Error: ${e.message}
                     </div>
                 </div>
             `;
-        } finally {
-            // Enable lại input + button
-            chatInput.disabled = false;
-            sendButton.disabled = false;
-            sendButton.classList.remove('opacity-50', 'cursor-not-allowed');
-            chatBox.scrollTop = chatBox.scrollHeight;
-            if (chatBox.children.length > 20) {
-                chatBox.removeChild(chatBox.firstChild);
-            }
-        }
-    });
+    } finally {
+      // Enable lại input + button
+      chatInput.disabled = false;
+      sendButton.disabled = false;
+      sendButton.classList.remove("opacity-50", "cursor-not-allowed");
+      chatBox.scrollTop = chatBox.scrollHeight;
+      if (chatBox.children.length > 20) {
+        chatBox.removeChild(chatBox.firstChild);
+      }
+    }
+  });
 
-    chatInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') sendButton.click();
-    });
+  chatInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendButton.click();
+  });
 });
