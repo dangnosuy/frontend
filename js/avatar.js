@@ -1,6 +1,6 @@
 function set_avatar() {
     const avatar = document.getElementById('avatar_generate')
-    const username = localStorage.getItem('username')
+    const username = localStorage.getItem('username') || sessionStorage.getItem('username');
     const prompt = document.getElementById('promptInput').value
     var data = {
         username: username,
