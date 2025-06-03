@@ -17,7 +17,7 @@ function SendPrompt() {
     prompt: prompt
   }
   console.log(data)
-  fetch('http://127.0.0.1:5554/api/texttomusic', {
+  fetch('https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/texttomusic', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const type = 'text_to_music';
 
   // Gửi request GET đến API lấy lịch sử
-  fetch(`http://127.0.0.1:5554/api/get_data_user?username=${encodeURIComponent(username)}&type=${encodeURIComponent(type)}`)
+  fetch(`https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/get_data_user?username=${encodeURIComponent(username)}&type=${encodeURIComponent(type)}`)
     .then(response => response.json())
     .then(data => {
       if (data.success) {
@@ -233,7 +233,7 @@ function toggleLike(trackId, button, currentLikes) {
   const product = "text_to_music";
 
   // Gửi yêu cầu đến /api/tym
-  fetch('http://127.0.0.1:5554/api/tym', {
+  fetch('https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/tym', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const username = localStorage.getItem('username') || sessionStorage.getItem('username') || 'current_user';
 
   // Gửi request GET đến API lấy tất cả dữ liệu
-  fetch(`http://127.0.0.1:5554/api/get_data_all?type=${encodeURIComponent(type)}&username=${encodeURIComponent(username)}`, {
+  fetch(`https://b6a62881-28fe-479b-b45b-27ced866329b-00-3ayo8cow7loyp.pike.replit.dev/api/get_data_all?type=${encodeURIComponent(type)}&username=${encodeURIComponent(username)}`, {
     headers: {
       'Cache-Control': 'no-cache'
     }
