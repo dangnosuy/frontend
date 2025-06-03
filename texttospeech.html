@@ -320,7 +320,7 @@
       audioElement.src = "";
 
       try {
-        const response = await fetch("https://0667af30-f437-4343-bd10-6c6e8c341ce8-00-2fe3pat0r6lg3.pike.replit.dev/api/tts_choice", {
+        const response = await fetch("http://127.0.0.1:5552/api/tts_choice", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
@@ -366,7 +366,7 @@
       formData.append('file', file);
 
       try {
-        const res = await fetch('https://0667af30-f437-4343-bd10-6c6e8c341ce8-00-2fe3pat0r6lg3.pike.replit.dev/tts_upload', {
+        const res = await fetch('http://127.0.0.1:5552/tts_upload', {
           method: 'POST',
           body: formData
         });
@@ -438,7 +438,7 @@
     async function loadHistory(username) {
       try {
         const response = await fetch(
-          `https://0667af30-f437-4343-bd10-6c6e8c341ce8-00-2fe3pat0r6lg3.pike.replit.dev/api/history_tts?username=${encodeURIComponent(username)}`
+          `http://127.0.0.1:5552/api/history_tts?username=${encodeURIComponent(username)}`
         );
         const historyData = await response.json();
 
