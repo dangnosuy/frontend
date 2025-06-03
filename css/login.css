@@ -251,7 +251,7 @@ toast-container {
   font-family: inherit;
 }
 
-.toast.show {
+.toast {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
